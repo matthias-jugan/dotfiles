@@ -1,0 +1,49 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "auto_update_extensions": {
+    "typst": false
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "vim_mode": true,
+  "ui_font_size": 13,
+  "buffer_font_features": {
+    "calt": false
+  },
+  "buffer_font_size": 13,
+  "theme": {
+    "mode": "system",
+    "light": "Zed Legacy: Rosé Pine Dawn",
+    "dark": "Zed Legacy: Rosé Pine Moon"
+  },
+  "base_keymap": "None",
+
+  //Editor
+  "show_wrap_guides": true, // Show/hide wrap guides (vertical rulers)
+  "wrap_guides": [80, 140],
+
+  "lsp": {
+    // Specify the LSP name as a key here.
+    "rust-analyzer": {
+      // These initialization options are merged into Zed's defaults
+      "initialization_options": {
+        "check": {
+          "command": "clippy" // rust-analyzer.check.command (default: "check")
+        },
+        //"checkOnSave": true,
+        "rustfmt": {
+          "extraArgs": ["+nightly"]
+        }
+      }
+    }
+  }
+}
