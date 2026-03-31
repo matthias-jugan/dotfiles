@@ -1,3 +1,9 @@
+if [[ "$(uname)" == "Darwin" ]]; then
+  IS_MAC=1
+else
+  IS_MAC=0
+fi
+
 if command -v brew >/dev/null 2>&1; then
   source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 elif [ -f $HOME/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]; then
@@ -5,15 +11,20 @@ elif [ -f $HOME/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]; then
 fi
 
 if [[ -z "$TMUX" && -n "$STARTUP_TMUX" ]] ;then
-	ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
+    if (( IS_MAC )); then
+		TMUX_CMD=/opt/homebrew/bin/tmux
+    else
+		TMUX_CMD=tmux
+    fi
+	ID="$( $TMUX_CMD ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
 	if [[ -z "$ID" ]] ;then # if not available create a new one
-		tmux new-session
+		$TMUX_CMD new-session
 	else
-		tmux attach-session -t "$ID" # if available attach to it
+		$TMUX_CMD attach-session -t "$ID" # if available attach to it
 	fi
 fi 
 
-if command -v brew >/dev/null 2>&1; then
+if (( IS_MAC )); then
   export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 fi
 
