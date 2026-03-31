@@ -29,6 +29,8 @@ history = 100000
 
 [terminal]
 
-#shell = { program = "zsh" }
+shell = { program = "zsh" }
 
+[env]
 
+STARTUP_TMUX = "1"
